@@ -2,7 +2,7 @@ import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallback from "@/presentionals/common/ErrorFallback";
 import RootLayout from "@/presentionals/common/RootLayout";
 import SliderPanel from "@/presentionals/common/SliderPanel";
-import SongCard from "@/presentionals/common/SongCard";
+import SectionPanel from "@/presentionals/home/SectionPanel";
 import PlayerWrapper from "@/presentionals/player/PlayerWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
@@ -38,17 +38,11 @@ function TempComponent() {
   const { data } = useGetSongs();
 
   return (
-    <div className="flex gap-x-20">
-      {data?.map((song) => (
-        <SongCard key={song.id}>
-          <SongCard.Image src={"https://placehold.co/150"} alt={song.title} />
-          <SongCard.Content>
-            <SongCard.Title>{song.title}</SongCard.Title>
-            <SongCard.Description>{song.artist}</SongCard.Description>
-          </SongCard.Content>
-        </SongCard>
-      ))}
-    </div>
+    <SectionPanel
+      songs={data ?? []}
+      title="패캠을 위한 믹스 & 추천"
+      moreLink="/"
+    />
   );
 }
 

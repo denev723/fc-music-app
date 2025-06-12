@@ -11,11 +11,11 @@ function SongCard({
   variant = "vertical",
   children,
   className,
-}: Cn<PropsWithChildren<{ variant?: Variant }>>) {
+}: Cn<PropsWithChildren<{ variant?: Variant; onClick?: () => void }>>) {
   const variantClass =
     variant === "vertical"
       ? "flex-col gap-y-16"
-      : "flex-row gap-x-14 items-center";
+      : "flex-row gap-x-14 items-center w-full";
   return (
     <SongCardContext.Provider value={{ variant }}>
       <div className={tw("flex", variantClass, className)}>{children}</div>
