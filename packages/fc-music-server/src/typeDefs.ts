@@ -6,22 +6,26 @@ export const typeDefs = gql`
     name: String!
     albums: [Album!]
   }
+
   type Album {
     id: ID!
     title: String!
     artist: Artist!
     songs: [Song!]
   }
+
   type Song {
     id: ID!
     title: String!
     genres: [Genre!]!
     album: Album!
   }
+
   type Genre {
     id: ID!
     name: String!
   }
+
   type Query {
     genres: [Genre!]!
     artists: [Artist!]!
@@ -29,6 +33,7 @@ export const typeDefs = gql`
     songs: [Song!]!
     albums: [Album!]!
   }
+
   type Mutation {
     addGenre(name: String!): Genre!
     addArtist(name: String!): Artist!
