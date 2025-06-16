@@ -4,7 +4,7 @@ import useAudioPlayer from "@/hooks/player/useAudioPlayer";
 import PlayButton from "@/presentionals/player/PlayButton";
 
 interface Props {
-  src: string;
+  src?: string;
 }
 
 export default function AudioContainer({ src }: Props) {

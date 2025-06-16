@@ -5,17 +5,29 @@ import RootLayout from "@/presentionals/common/RootLayout";
 import SliderPanel from "@/presentionals/common/SliderPanel";
 import SectionPanel from "@/presentionals/home/SectionPanel";
 import PlayerWrapper from "@/presentionals/player/PlayerWrapper";
+import { useAppStore } from "@/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 const queryClient = new QueryClient();
 
 function App() {
   const [open, setOpen] = useState(false);
+  const { currentSong, setCurrentSong } = useAppStore();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    setCurrentSong({
+      id: 1,
+      title: "Song 1",
+      artist: "Artist 1",
+      genre: "R&B",
+      path: "http://localhost:4000/audio/read-your-mind-ft-jason-walker-by-atch.mp3",
+    });
+  }, [setCurrentSong]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -31,7 +43,7 @@ function App() {
         </SliderPanel>
       </RootLayout>
       <PlayerWrapper>
-        <AudioContainer src="/read-your-mind-ft-jason-walker-by-atch.mp3" />
+        <AudioContainer src={currentSong?.path} />
       </PlayerWrapper>
     </QueryClientProvider>
   );
