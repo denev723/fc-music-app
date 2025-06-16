@@ -1,0 +1,28 @@
+import VolumeIcon from "@/assets/icons/volume_up.svg?react";
+import Slider from "@/presentionals/player/Slider";
+import { ChangeEvent } from "react";
+
+interface Props {
+  volume: number;
+  onChange: (volume: number) => void;
+}
+
+export default function VolumeController({ volume, onChange }: Props) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const v = Number(e.currentTarget.value);
+    onChange(v);
+  };
+
+  return (
+    <div className="flex items-center gap-x-6 w-96">
+      <VolumeIcon />
+      <Slider
+        min={0}
+        max={1}
+        step={0.01}
+        value={volume}
+        onChange={handleChange}
+      />
+    </div>
+  );
+}

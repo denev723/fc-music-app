@@ -1,3 +1,4 @@
+import AudioContainer from "@/containers/player/AudioContainer";
 import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallback from "@/presentionals/common/ErrorFallback";
 import RootLayout from "@/presentionals/common/RootLayout";
@@ -29,7 +30,9 @@ function App() {
           </div>
         </SliderPanel>
       </RootLayout>
-      <PlayerWrapper />
+      <PlayerWrapper>
+        <AudioContainer src="/read-your-mind-ft-jason-walker-by-atch.mp3" />
+      </PlayerWrapper>
     </QueryClientProvider>
   );
 }
