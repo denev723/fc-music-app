@@ -23,8 +23,16 @@ function App() {
     setCurrentSong({
       id: 1,
       title: "Song 1",
-      artist: "Artist 1",
-      genre: "R&B",
+      album: {
+        id: 1,
+        title: "Album 1",
+        artist: {
+          id: 1,
+          name: "Artist 1",
+        },
+        thumbnail: "https://placehold.co/150",
+      },
+      genres: [{ id: 1, name: "R&B" }],
       path: "http://localhost:4000/audio/read-your-mind-ft-jason-walker-by-atch.mp3",
     });
   }, [setCurrentSong]);
