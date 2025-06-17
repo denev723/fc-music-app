@@ -1,3 +1,4 @@
+import PlayListContainer from "@/containers/home/PlayListContainer";
 import AudioContainer from "@/containers/player/AudioContainer";
 import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallback from "@/presentionals/common/ErrorFallback";
@@ -7,47 +8,21 @@ import SectionPanel from "@/presentionals/home/SectionPanel";
 import PlayerWrapper from "@/presentionals/player/PlayerWrapper";
 import { useAppStore } from "@/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [open, setOpen] = useState(false);
-  const { currentSong, setCurrentSong } = useAppStore();
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  useEffect(() => {
-    setCurrentSong({
-      id: 1,
-      title: "Song 1",
-      album: {
-        id: 1,
-        title: "Album 1",
-        artist: {
-          id: 1,
-          name: "Artist 1",
-        },
-        thumbnail: "https://placehold.co/150",
-      },
-      genres: [{ id: 1, name: "R&B" }],
-      path: "http://localhost:4000/audio/read-your-mind-ft-jason-walker-by-atch.mp3",
-    });
-  }, [setCurrentSong]);
+  const { currentSong, isPlayListExpanded } = useAppStore();
 
   return (
     <QueryClientProvider client={queryClient}>
       <RootLayout>
-        <button onClick={handleOpen}>Open</button>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <TempComponent />
         </ErrorBoundary>
-        <SliderPanel open={open} onClose={handleClose}>
-          <div className="w-[300px]">
-            <h1>재생목록</h1>
-          </div>
+        <SliderPanel open={isPlayListExpanded}>
+          <PlayListContainer />
         </SliderPanel>
       </RootLayout>
       <PlayerWrapper>
@@ -59,12 +34,14 @@ function App() {
 
 function TempComponent() {
   const { data } = useGetSongs();
+  const { addToPlayList } = useAppStore();
 
   return (
     <SectionPanel
       songs={data ?? []}
       title="패캠을 위한 믹스 & 추천"
       moreLink="/"
+      onItemClick={(song) => addToPlayList(song)}
     />
   );
 }

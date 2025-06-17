@@ -1,22 +1,16 @@
-import useOutsideClick from "@/hooks/common/useOutsideClick";
 import { PropsWithChildren } from "react";
 import { motion } from "framer-motion";
 
 interface Props {
   open: boolean;
-  onClose: () => void;
 }
 
 export default function SliderPanel({
   children,
   open,
-  onClose,
 }: PropsWithChildren<Props>) {
-  const containerRef = useOutsideClick<HTMLDivElement>(onClose);
-
   return (
     <motion.div
-      ref={containerRef}
       initial={{ x: "100%" }}
       animate={open ? "open" : "closed"}
       variants={{
