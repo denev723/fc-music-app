@@ -28,7 +28,7 @@ export default function PlayListItem({
   const [open, setOpen] = useState(false);
 
   return (
-    <li className="flex relative" onClick={() => onClick(song)}>
+    <div className="flex relative" onClick={() => onClick(song)}>
       <button
         className="absolute top-10 right-17 z-10"
         onClick={() => setOpen((prev) => !prev)}
@@ -99,6 +99,6 @@ export default function PlayListItem({
           <SongCard.Description>{song.album.artist.name}</SongCard.Description>
         </SongCard.Content>
       </SongCard>
-    </li>
+    </div>
   );
 }
