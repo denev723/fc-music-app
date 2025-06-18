@@ -2,7 +2,15 @@ import PlayListItem from "@/presentionals/home/PlayListItem";
 import { useAppStore } from "@/store";
 
 export default function PlayListContainer() {
-  const { playList, setCurrentSong } = useAppStore();
+  const {
+    playList,
+    playLists,
+    setCurrentSong,
+    removeFromPlayList,
+    addPlayList,
+    addSongToPlayList,
+    likeSong,
+  } = useAppStore();
 
   return (
     <div className="w-[522px] flex flex-col h-full">
@@ -17,7 +25,12 @@ export default function PlayListContainer() {
             <PlayListItem
               key={song.id}
               song={song}
+              playlists={playLists}
               onClick={(song) => setCurrentSong(song)}
+              onRemoveFromPlaylist={(song) => removeFromPlayList(song)}
+              onAddPlayList={addPlayList}
+              onAddSongToPlayList={addSongToPlayList}
+              onLikeSong={likeSong}
             />
           ))
         )}

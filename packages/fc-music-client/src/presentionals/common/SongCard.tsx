@@ -27,7 +27,7 @@ function SongCard({
         initial="rest"
         variants={{
           hover: { background: "rgba(255, 255, 255, 0.1)" },
-          tap: { scale: 0.95 },
+          // tap: { scale: 0.95 },
           rest: { background: "rgba(255, 255, 255, 0)" },
         }}
         className={tw("flex relative p-9 rounded-6", variantClass, className)}
