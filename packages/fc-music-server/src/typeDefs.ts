@@ -28,18 +28,37 @@ export const typeDefs = gql`
     name: String!
   }
 
+  type MixMaker {
+    id: ID!
+    name: String!
+    description: String!
+    songs: [Song!]
+  }
+
   type Query {
     genres: [Genre!]!
     artists: [Artist!]!
     artist(id: ID!): Artist
     songs: [Song!]!
     albums: [Album!]!
+    mixMakers: [MixMaker!]!
   }
 
   type Mutation {
     addGenre(name: String!): Genre!
     addArtist(name: String!): Artist!
-    addSong(title: String!, albumId: ID!, genreIds: [ID!]!): Song!
-    addAlbum(title: String!, artistId: ID!, releaseDate: String!): Album!
+    addSong(
+      title: String!
+      albumId: ID!
+      genreIds: [ID!]!
+      path: String!
+    ): Song!
+    addAlbum(
+      title: String!
+      artistId: ID!
+      releaseDate: String!
+      thumbnail: String!
+    ): Album!
+    addMixMaker(name: String!, description: String!, songIds: [ID!]!): MixMaker!
   }
 `;

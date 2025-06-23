@@ -1,3 +1,4 @@
+import MixMakerContainer from "@/containers/home/MixMakerContainer";
 import PlayListContainer from "@/containers/home/PlayListContainer";
 import AudioContainer from "@/containers/player/AudioContainer";
 import useGetSongs from "@/hooks/useGetSongs";
@@ -20,6 +21,7 @@ function App() {
       <RootLayout>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <TempComponent />
+          <MixMakerContainer />
         </ErrorBoundary>
         <SliderPanel open={isPlayListExpanded}>
           <PlayListContainer />
@@ -34,14 +36,14 @@ function App() {
 
 function TempComponent() {
   const { data } = useGetSongs();
-  const { addToPlayList } = useAppStore();
+  const { addToPlaylist } = useAppStore();
 
   return (
     <SectionPanel
       songs={data ?? []}
       title="패캠을 위한 믹스 & 추천"
       moreLink="/"
-      onItemClick={(song) => addToPlayList(song)}
+      onItemClick={(song) => addToPlaylist([song])}
     />
   );
 }

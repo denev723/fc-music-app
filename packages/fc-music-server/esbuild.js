@@ -2,6 +2,7 @@ const esbuild = require("esbuild");
 
 const config = {
   entryPoints: ["./src/index.ts"],
+  external: ["@prisma/client"],
   bundle: true,
   platform: "node",
   outfile: "./dist/server.js",
