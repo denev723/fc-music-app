@@ -21,6 +21,7 @@ export const typeDefs = gql`
     path: String!
     genres: [Genre!]!
     album: Album!
+    tags: [Tag!]
   }
 
   type Genre {
@@ -35,6 +36,12 @@ export const typeDefs = gql`
     songs: [Song!]
   }
 
+  type Tag {
+    id: ID!
+    name: String!
+    songs: [Song!]
+  }
+
   type Query {
     genres: [Genre!]!
     artists: [Artist!]!
@@ -42,6 +49,7 @@ export const typeDefs = gql`
     songs: [Song!]!
     albums: [Album!]!
     mixMakers: [MixMaker!]!
+    tags: [Tag!]!
   }
 
   type Mutation {
@@ -60,5 +68,7 @@ export const typeDefs = gql`
       thumbnail: String!
     ): Album!
     addMixMaker(name: String!, description: String!, songIds: [ID!]!): MixMaker!
+    addTag(name: String!, songIds: [ID!]): Tag!
+    addTagToSong(tagId: ID!, songId: ID!): Song!
   }
 `;

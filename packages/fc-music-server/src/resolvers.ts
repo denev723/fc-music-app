@@ -28,6 +28,7 @@ export const resolvers = {
               artist: true,
             },
           },
+          tags: true,
         },
       }),
     albums: async () =>
@@ -45,6 +46,12 @@ export const resolvers = {
               },
             },
           },
+        },
+      }),
+    tags: async () =>
+      prisma.tag.findMany({
+        include: {
+          songs: true,
         },
       }),
   },
@@ -156,6 +163,42 @@ export const resolvers = {
         include: { songs: true },
       });
       return mixMaker;
+    },
+    addTag: async (
+      _: any,
+      { name, songIds }: { name: string; songIds: string[] }
+    ) => {
+      const tag = await prisma.tag.create({
+        data: {
+          name,
+          songs: songIds
+            ? { connect: songIds.map((id) => ({ id: parseInt(id) })) }
+            : undefined,
+        },
+        include: {
+          songs: true,
+        },
+      });
+
+      return tag;
+    },
+    addTagToSong: async (
+      _: any,
+      { tagId, songId }: { tagId: string; songId: string }
+    ) => {
+      const song = await prisma.song.update({
+        where: { id: parseInt(songId) },
+        data: {
+          tags: {
+            connect: { id: parseInt(tagId) },
+          },
+        },
+        include: {
+          tags: true,
+        },
+      });
+
+      return song;
     },
   },
 };
