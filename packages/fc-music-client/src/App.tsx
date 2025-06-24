@@ -5,6 +5,7 @@ import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallback from "@/presentionals/common/ErrorFallback";
 import RootLayout from "@/presentionals/common/RootLayout";
 import SliderPanel from "@/presentionals/common/SliderPanel";
+import RecommendationsContainer from "@/presentionals/home/RecommendationsContainer";
 import SectionPanel from "@/presentionals/home/SectionPanel";
 import PlayerWrapper from "@/presentionals/player/PlayerWrapper";
 import { useAppStore } from "@/store";
@@ -22,6 +23,7 @@ function App() {
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <TempComponent />
           <MixMakerContainer />
+          <RecommendationsContainer />
         </ErrorBoundary>
         <SliderPanel open={isPlayListExpanded}>
           <PlayListContainer />
