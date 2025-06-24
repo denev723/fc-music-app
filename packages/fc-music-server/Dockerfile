@@ -8,12 +8,7 @@ COPY package.json .
 RUN npm install
 
 # Bundle app source
-COPY tsconfig.json .
-COPY src ./src
-COPY prisma ./prisma
-COPY .env ./
-COPY esbuild.js ./
-COPY public ./public
+COPY . .
 
 # prisma generate
 RUN npx prisma generate
