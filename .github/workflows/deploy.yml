@@ -33,7 +33,7 @@ on:
 env:
   AWS_REGION: ap-northeast-2 # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: fastcampus/fc-music-app # set this to your Amazon ECR repository name
-  ECS_SERVICE: fc-music-app-task-service # set this to your Amazon ECS service name
+  ECS_SERVICE: fc-music-app-service # set this to your Amazon ECS service name
   ECS_CLUSTER: fc-music-app-cluster # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION:
     .aws/fc-music-app-task-revision2.json # set this to the path to your Amazon ECS task definition
